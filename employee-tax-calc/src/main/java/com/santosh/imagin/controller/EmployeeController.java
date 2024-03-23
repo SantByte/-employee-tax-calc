@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.santosh.imagin.model.Employee;
 import com.santosh.imagin.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class EmployeeController {
 
@@ -17,7 +19,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@PostMapping("/employees")
-	public ResponseEntity<String> storeEmpDetails(@RequestBody Employee emp) {
+	public ResponseEntity<String> storeEmpDetails(@RequestBody @Valid Employee emp) {
 		if (employeeService.validateAndSave(emp)) {
 			return ResponseEntity.ok("Employee Details are saved successfully");
 		} else {
